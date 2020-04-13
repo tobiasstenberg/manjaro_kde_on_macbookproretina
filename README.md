@@ -25,7 +25,11 @@ FINAL WARNING: This is not a perfect guide and if you choose to erase your disk 
 
 ## Why Manjaro?
 
-## How do I create a partion, what is a partion and do you have an ASCII potato?
+### Before following my instructions on installing the actual OS
+
+The next sections are put together from a variety of sources. This guide mainly covers how to configure Manjaro post-installation. If you want to follow a different guide on installing the OS itself, skip the next 2 sections and I would recommend this guide: https://www.lifewire.com/dual-boot-linux-and-mac-os-4125733
+
+## How do I create a partion, what is a partion and can I have an ASCII potato?
 
                                   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░                    
                               ▓▓▓▓████████████████▓▓▓▓▒▒              
@@ -74,8 +78,41 @@ FINAL WARNING: This is not a perfect guide and if you choose to erase your disk 
               ░░░░▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░            
 
 
+Simply put, a partion on a disk is a part of the HDD that is separated. Partitions allow you to install multiple operating systems on the same HDD.  
+In our case, this will be the way that we install Linux on a Mac. The reason why this is the recommended way of installing it, is because Mac sometimes do firmware updates and some of these firmware updates are crucial to the hardware on a low level. 
+The other reason why we are going to partition the disk first is that if somehow we make a mistake, we can always put our blindfold back on revert back to our sad OS X ways. 
+This is not a problem though. We can configure it in a way so that we only boot OS X once every month to get an update and the rest of the time when your computer turns on it will boot into Manjaro.  
 
-The first two questions are easy. A partion 
+To partition a disk on Mac see this sort video on YT: https://www.youtube.com/watch?v=n2xNDUqjbhU  
+
+Remember to use MS-DOS(FAT) format. It's up to you how much space you want your new OS to have. But I would just recommend not going too extreme on either side. Leave a good amount of space for OS X for updates and shit and have enough space on your new OS to actually make it usable. 
+After partioning the disk, you need to choose whether you want to use an external bootloader. You can do without it but if you have never dual booted I would recommend using one for convenience of switching between OS. 
+
+## Disabling SIP
+
+On later OS X versions you need to disable SIP, which prevents users from certain actions. 
+To disable this, you should reboot and hold CMD-R to enter recovery mode. From there, go to /Applications/Terminal.  
+´csrutil disable´    
+Enter your password. 
+´reboot´
+
+## Installing rEFInd bootloader
+
+rEFInd Boot Manager: https://www.rodsbooks.com/refind/
+To install the bootmanager, go to: https://sourceforge.net/projects/refind/ and download the zip.
+Unzip it, open the folder, drag the install to your terminal window. Install it. Done.
+
+Once you have done all these steps, you are ready to boot a live Manjaro environment. 
+Reboot. rEFInd should present you with several options to boot now. Choose to boot from your flash drive. 
+Before booting into the environment, you can now set the locale, time, language and keyboard layout to your liking. Just choose default keyboard layout. 
+
+## First glance at Manjaro
+
+Once inside the live environment of Manjaro, feel free to get a sense of the OS if this is your first time. 
+When you are done, click Launch Installer.
+Choose to install Manjaro with the settings you like but more importantly you need to choose "Replace a disk partition" to install it on the partition you made in OS X. 
+Leave the bootloader option to its default setting. Boot managing is taken care of. 
+Wait for installation... drink coffee... come back and reboot.
 
 ## Access to Wifi
 
@@ -120,6 +157,27 @@ The following command will ping all the servers and return a list that pacman wi
 
  `sudo pacman-mirrors -g`  
 
+ ## Installation af mbpfancontrol
+
+ At this point you might have noticed that your fans are not working properly, so it is time for us to do some configurations to make the Mac hardware run smoothly.  
+ First things, do `yay mbpfancontrol` and install the package from the AUR.  
+ This package depends on 2 services, coretemp and applesmc. In order to make those services run on boot, do `sudo nano /etc/modules` and add coretemp and applesmc in 2 lines. Press CTRL+X to save. Reboot.  
+
+ The mbpfancontrol package controls the fan and has a config file. To view the config file do: `sudo nano /etc/mbpfan.conf`. This is the file that we edit to make the fans not run at maximum RPM all day long.  
+ Before doing so, you should do: `sensors_detect`. This will guide you through getting readings from the sensors in your laptop. Just answer yes to all the questions.  
+ After doing this, you can type `sensors` to get readings of the temperature in your CPU cores and the RPM of each fan.  
+ You can now read different settings from the applesmc module to figure out how your settings should be. You should now do a `cat /sys/devices/platform/applesmc.768/fan*_max`. Write down this value. This is your max_speed in /etc/mbpfan.conf.  
+ IMPORTANT: It's not very clear that the min and max speed of /etc/mbpfan.conf have been commented out with #. But to put the variables to use uncomment them.  
+ You should now be able to get the fans running at decent RPM at least. 
+
+ ## Swapping the opt and cmd key
+
+We can swap the option and cmd key by typing this:
+ `$ echo 1 | sudo tee /sys/module/hid_apple/parameters/swap_opt_cmd`  
+
+ To make the changes permanent type:  
+ `$ echo options hid_apple swap_opt_cmd=1 | sudo tee -a /etc/modprobe.d/hid_apple.conf`
+
  ## Installation of libraries for lightweight gaming in case you are lucky enough to have an nvidia graphics card
 
 `sudo pacman -S lib32-libldap lib32-nvidia-utils lib32-nvidia-libgl lib32-alsa-lib 
@@ -127,3 +185,7 @@ lib32-alsa-plugins lib32-libpulse lib32-alsa-oss lib32-openal wine winetricks pl
 
 PlayOnLinux is a front-end for wine basically and will allow you to play windows-only games through linux. PlayOnLinux is depite its deceiving name an excellent candidate for running Adobe applications through wine in a convenient front-end, in case that's something you are interested (hint: use FOSS instead). Another option for this could be Lutris or creating your own wrappers for wine. I will leave that up to you.
 
+ ## Convenient additions to your .bashrc 
+
+`echo -e '\nalias ll="ls -lhF"' >> ~/.bashrc`
+`echo -e '\nalias la="ls -lahF"' >> ~/.bashrc`
