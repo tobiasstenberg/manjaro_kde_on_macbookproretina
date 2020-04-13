@@ -1,7 +1,7 @@
-# A guide on how to setup Manjaro (or Arch-based linux distro) on MacBook Pro Retina (mid 2014)
+# A shitty guide on how to setup Manjaro (or Arch-based linux distro) on MacBook Pro Retina (mid 2014)
 
-My strategy for finding a way to install Linux and FOSS on a closed Mac is that of sticking my nose where it doesn't belong, where I have unsufficient knowledge. The strategy is definitely not pretty, but I guarantee that it is a very efficient way of learning. Stop caring so much about the clinically closed silver box that is your MacBook and go open source.  
-NO, I am not a developer, nor am I a decent programmer. I am an artist who likes to work with code and software and I have some basic knowledge about computers. 
+My strategy for finding a way to install Linux and FOSS on a closed Mac is that of sticking my nose where it doesn't belong, where I have unsufficient knowledge. The strategy is definitely not pretty, but I guarantee that it is a very efficient way of learning. Stop caring so much about the clinically clean silver box that is your MacBook and go open source.  
+No, I am not a developer, nor am I a decent programmer. I am an artist who likes to work with code and software and I have some basic knowledge about computers. 
 But I am a trashcan programmer at best. 
 So, be warned, if you choose to follow this guide, you are not following a perfect guide on how to get the OS you want. You are going on a messy and shitty journey of failing software and hardware. But there is a way. Open source.
 This guide also covers how to create a basic partition on your HDD so that you can always go back to macOS if you desire (I also explain why this is the optimal way to do it). I learned the hard way that erasing the entire disk is not the solution that you want. 
@@ -37,7 +37,11 @@ I will keep this short. I like the KDE desktop environment. It looks great and i
 
 The next sections are put together from a variety of sources. This guide mainly covers how to configure Manjaro post-installation. If you want to follow a different guide on installing the OS itself, skip the next 2 sections and I would recommend this guide: https://www.lifewire.com/dual-boot-linux-and-mac-os-4125733
 
-## How do I create a partion, what is a partion and can I have an ASCII potato?
+## Creating an installer on a usb flash drive
+
+Get yourself a basic usb flash drive of minimum 8 GB. I recommend using the program Etcher to format the disk. Get your preferred .iso from the official Manjaro website and flash the drive with Etcher. It's simple. 
+
+## How do I create a partion, what is a partion and can I have a halfway chopped ASCII potato?
 
                                   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░                    
                               ▓▓▓▓████████████████▓▓▓▓▒▒              
@@ -136,7 +140,7 @@ Open firewall configuration and enable with default settings. Reboot again.
 
  yay repo: https://github.com/Jguer/yay
 
-Here is a link to a recent guide on yay: https://www.ostechnix.com/yay-found-yet-another-reliable-aur-helper/
+Here is a link to a recent guide on how to install yay that you should follow: https://www.ostechnix.com/yay-found-yet-another-reliable-aur-helper/
 
 A cheatsheet list of commands for yay to install packages:  
  Install: `yay -S PKG`  
@@ -151,7 +155,7 @@ Search for package and print a list of options: `yay PKG`
 
  ## Installation of broadcom driver
 
- Open System Settings -> Kernel to see which kernel version you are running. This makes a difference for the installation of the broadcom driver for WiFi. 
+ Open System Settings/Kernel to see which kernel version you are running. This makes a difference for the installation of the broadcom driver for WiFi. 
 
  Searc for broadcom in yay: `yay broadcom`  
  Install the version that matches your kernel  
@@ -178,6 +182,14 @@ The following command will ping all the servers and return a list that pacman wi
  IMPORTANT: It's not very clear that the min and max speed of /etc/mbpfan.conf have been commented out with #. But to put the variables to use uncomment them.  
  You should now be able to get the fans running at decent RPM at least. 
 
+ ## Configuring CPU frequency scaling
+
+ (coming soon)
+
+ ## Configuring to HiDPI support to accommodate the retina display
+
+ (coming soon)
+
  ## Swapping the opt and cmd key
 
 We can swap the option and cmd key by typing this:
@@ -191,9 +203,9 @@ We can swap the option and cmd key by typing this:
 `sudo pacman -S lib32-libldap lib32-nvidia-utils lib32-nvidia-libgl lib32-alsa-lib 
 lib32-alsa-plugins lib32-libpulse lib32-alsa-oss lib32-openal wine winetricks playonlinux`
 
-PlayOnLinux is a front-end for wine basically and will allow you to play windows-only games through linux. PlayOnLinux is depite its deceiving name an excellent candidate for running Adobe applications through wine in a convenient front-end, in case that's something you are interested (hint: use FOSS instead). Another option for this could be Lutris or creating your own wrappers for wine. I will leave that up to you.
+PlayOnLinux is a front-end for wine basically and will allow you to play windows-only games through linux. PlayOnLinux is depite its deceiving name an excellent candidate for running Adobe applications through wine in a convenient front-end, in case that's something you are interested in (hint: use FOSS instead). Another option for this could be Lutris or creating your own wrappers for wine. I will leave that up to you.
 
  ## Convenient additions to your .bashrc 
-
-`echo -e '\nalias ll="ls -lhF"' >> ~/.bashrc`
-`echo -e '\nalias la="ls -lahF"' >> ~/.bashrc`
+Simple and convenient list additions to your .bashrc
+`echo -e '\nalias ll="ls -lhF"' >> ~/.bashrc`  
+`echo -e '\nalias la="ls -lahF"' >> ~/.bashrc`  
