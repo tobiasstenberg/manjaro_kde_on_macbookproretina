@@ -1,12 +1,12 @@
 # A guide on how to setup Manjaro (or Arch-based linux distro) on MacBook Pro Retina (mid 2014)
 
-My strategy for finding a way to install Linux and FOSS on a closed Mac is that of sticking my nose where it doesn't belong, where I have unsufficient knowledge. At times that strategy is definitely not pretty, but I guarantee that it is a very efficient way of learning. Stop caring so much about the clinicallly white and closed silver box that is your MacBook and go open source.  
-NO, I am not a developer, nor am I a decent programmer. I am an artist who likes to work with code and software and I have some basic knowledge about computer. 
+My strategy for finding a way to install Linux and FOSS on a closed Mac is that of sticking my nose where it doesn't belong, where I have unsufficient knowledge. The strategy is definitely not pretty, but I guarantee that it is a very efficient way of learning. Stop caring so much about the clinically closed silver box that is your MacBook and go open source.  
+NO, I am not a developer, nor am I a decent programmer. I am an artist who likes to work with code and software and I have some basic knowledge about computers. 
 But I am a trashcan programmer at best. 
 So, be warned, if you choose to follow this guide, you are not following a perfect guide on how to get the OS you want. You are going on a messy and shitty journey of failing software and hardware. But there is a way. Open source.
-This guide covers how to create a basic partition on your HDD so that you can always go back to macOS if you desire (I also explain why this is the optimal way to do it). I learned the hard way that erasing the entire disk is not the solution that you want. 
+This guide also covers how to create a basic partition on your HDD so that you can always go back to macOS if you desire (I also explain why this is the optimal way to do it). I learned the hard way that erasing the entire disk is not the solution that you want. 
 
-I made the decision to switch from Mac and OS X to a Linux operating system out of frustration with the restrictions that usually follow Mac around. As I do not have a ton of experience with installing a new OS, partitioning harddrives, configuring and compiling in c and so on, this repo is a way for me to collect the experiences gathered from this Linux journey.
+I made the decision to switch from Mac and OS X to a Linux operating system out of frustration with the restrictions that usually comes with owning a Mac. As I do not have a ton of experience with installing a new OS, partitioning harddrives, configuring and compiling in C and so on, this repo is a way for me to collect the experiences gathered from this Linux journey.
 
 I made this repo mainly for myself because I wanted to collect and gather my experiences with installing Manjaro on a MacBook instead of going back and forth. I will add config files and updates as I gain experience.  
 Nevertheless, if you are as fed up with the restrictions of OS X and Mac in general, you might want to switch to a Linux based operating system. If that's the case, then I have bittersweet news: The good news is that your decision is excellent and Linux is a great choice. The bad news is that Mac and OS X is not very linux-friendly. I would in fact consider them linux-unfriendly. To make matters worse, you chose to install it on a laptop. But hey, there is a way and you just might get a better performing computer with better longevity out of this. If you care and spend the time to set things up properly.
@@ -21,9 +21,17 @@ Fans are going at max speed at all times. This issue is slightly more complicate
 
 CPU runs hot (even when idle). This issue is adressed in the guide and it is the most complicated on the list. For some the solution is to disable file indexing as a background service. For others it requires a close monitoring of what exaclty is eating your CPU. This guide will go through setting up CPU frequency scaling as well. Your solution may vary and may require research. 
 
-FINAL WARNING: This is not a perfect guide and if you choose to erase your disk or fry an egg on your burning hot CPU, it's up to you to find new hardware and a way to restore macOS if you want. Choice of OS is your decision. As it should be. 
+#### FINAL WARNING: This is not a perfect guide and if you choose to erase your disk or fry an egg on your burning hot CPU, it's up to you to find new hardware and a way to restore macOS if you want. Choice of OS is your decision. As it should be. 
 
 ## Why Manjaro?
+
+Manjaro is a beautiful distro of Linux which is Arch-based. An arch-based distro has the advantage of access to the Arch User Repository (AUR) which is an amazing community of people making open source software and packages. Installing Arch Linux could be an option for you, but Arch Linux is very difficult to install and requires quite a lot of effort. Arch Linux is cutting edge and if you want control over every aspect of your OS, it is the way to go. Manjaro is a lot easier to install and still reaps the benefits of access to the AUR while being friendly on new users.
+Manjaro is a rolling release system, meaning that every update is sent out immediately. Personally, I love rolling release systems but if it is not for you, consider installing a Debian-based distro maybe. Ubuntu, Mint, Fedore.  
+Where Apple seems to be asking "How much are you willing to spend?", Linux asks: "What is your flavour? Which type of OS fits you the best?"
+
+## Desktop Environments
+
+I will keep this short. I like the KDE desktop environment. It looks great and is highly customizable. If you want GNOME or whatever, go for it. In the end, if you don't like it, why not just install more than one and play around?
 
 ### Before following my instructions on installing the actual OS
 
@@ -80,10 +88,10 @@ The next sections are put together from a variety of sources. This guide mainly 
 
 Simply put, a partion on a disk is a part of the HDD that is separated. Partitions allow you to install multiple operating systems on the same HDD.  
 In our case, this will be the way that we install Linux on a Mac. The reason why this is the recommended way of installing it, is because Mac sometimes do firmware updates and some of these firmware updates are crucial to the hardware on a low level. 
-The other reason why we are going to partition the disk first is that if somehow we make a mistake, we can always put our blindfold back on revert back to our sad OS X ways. 
-This is not a problem though. We can configure it in a way so that we only boot OS X once every month to get an update and the rest of the time when your computer turns on it will boot into Manjaro.  
+The other reason why we are going to partition the disk first is that if somehow we make a mistake, we can always put our blindfold back on and revert back to our sad OS X ways. 
+This is not a problem though. We can configure it in a way so that we only boot OS X every once in a while for an update and the rest of the time when your computer turns on it will boot into Manjaro.  
 
-To partition a disk on Mac see this sort video on YT: https://www.youtube.com/watch?v=n2xNDUqjbhU  
+To partition a disk on Mac see this short vid on YT: https://www.youtube.com/watch?v=n2xNDUqjbhU  
 
 Remember to use MS-DOS(FAT) format. It's up to you how much space you want your new OS to have. But I would just recommend not going too extreme on either side. Leave a good amount of space for OS X for updates and shit and have enough space on your new OS to actually make it usable. 
 After partioning the disk, you need to choose whether you want to use an external bootloader. You can do without it but if you have never dual booted I would recommend using one for convenience of switching between OS. 
@@ -92,18 +100,18 @@ After partioning the disk, you need to choose whether you want to use an externa
 
 On later OS X versions you need to disable SIP, which prevents users from certain actions. 
 To disable this, you should reboot and hold CMD-R to enter recovery mode. From there, go to /Applications/Terminal.  
-´csrutil disable´    
+`csrutil disable`    
 Enter your password. 
-´reboot´
+`reboot`
 
 ## Installing rEFInd bootloader
 
-rEFInd Boot Manager: https://www.rodsbooks.com/refind/
-To install the bootmanager, go to: https://sourceforge.net/projects/refind/ and download the zip.
-Unzip it, open the folder, drag the install to your terminal window. Install it. Done.
+rEFInd Boot Manager: https://www.rodsbooks.com/refind/  
+To install the bootmanager, go to: https://sourceforge.net/projects/refind/ and download the zip.  
+Unzip it, open the folder, drag the install to your terminal window. Install it. Done.  
 
 Once you have done all these steps, you are ready to boot a live Manjaro environment. 
-Reboot. rEFInd should present you with several options to boot now. Choose to boot from your flash drive. 
+Reboot. rEFInd should present you with several options to boot now. Choose to boot from your flash drive.  
 Before booting into the environment, you can now set the locale, time, language and keyboard layout to your liking. Just choose default keyboard layout. 
 
 ## First glance at Manjaro
@@ -116,7 +124,7 @@ Wait for installation... drink coffee... come back and reboot.
 
 ## Access to Wifi
 
-To update pacman after initial install of manjaro, you need WiFi. Since the MacBook doesn't have an ethernet port, you need to share WiFi from your phone using either bluetooth or usb.
+To update pacman after initial install of manjaro, you need WiFi. Since the MacBook doesn't have an ethernet port, you need to share WiFi from your phone using either bluetooth or usb. Since this will depend on a number of factors I will leave it up to you. Find a way. It's WiFi. It's everywhere. 
 
 ## Update all packages for the first time, install firewall and reboot
 
@@ -137,7 +145,7 @@ A cheatsheet list of commands for yay to install packages:
  Update pacman and yay packages: `yay -Syu`  
 Search for package and print a list of options: `yay PKG`  
  Install without confirm: `yay -S --noconfirm PKG`  
- print pakker som skal opdateres: `yay -Pu`  
+ Print pakker that need updates: `yay -Pu`  
  Remove unnecessary dependencies: `yay -Yc`  
  Manual: `man yay`  
 
@@ -157,7 +165,7 @@ The following command will ping all the servers and return a list that pacman wi
 
  `sudo pacman-mirrors -g`  
 
- ## Installation af mbpfancontrol
+ ## Installation of mbpfancontrol
 
  At this point you might have noticed that your fans are not working properly, so it is time for us to do some configurations to make the Mac hardware run smoothly.  
  First things, do `yay mbpfancontrol` and install the package from the AUR.  
