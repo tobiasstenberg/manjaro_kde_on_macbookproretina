@@ -1,23 +1,27 @@
-# A shitty guide on how to setup Manjaro (or Arch-based linux distro) on MacBook Pro Retina (mid 2014)
+# A traschan programmers guide on how to setup Manjaro (or Arch-based linux distro) on MacBook Pro Retina (mid 2014)
 
-My strategy for finding a way to install Linux and FOSS on a closed Mac is that of sticking my nose where it doesn't belong, where I have unsufficient knowledge. The strategy is definitely not pretty, but I guarantee that it is a very efficient way of learning. Stop caring so much about the clinically clean silver box that is your MacBook and go open source.  
+My strategy for finding a way to install Linux and FOSS on a closed Mac is that of sticking my nose where it doesn't belong, where I have unsufficient knowledge. The strategy is definitely not pretty, but I guarantee that it is a very efficient way of learning.  
 No, I am not a developer, nor am I a decent programmer. I am an artist who likes to work with code and software and I have some basic knowledge about computers. 
 But I am a trashcan programmer at best. 
-So, be warned, if you choose to follow this guide, you are not following a perfect guide on how to get the OS you want. You are going on a messy and shitty journey of failing software and hardware. But there is a way. Open source.
+So, be warned, if you choose to follow this guide, you are not following a perfect guide on how to get the OS you want. You are going on a messy journey of failing software and hardware. But there is a way. Open source.
 This guide also covers how to create a basic partition on your HDD so that you can always go back to macOS if you desire (I also explain why this is the optimal way to do it). I learned the hard way that erasing the entire disk is not the solution that you want. 
 
+## Why this repo?
+
 I made the decision to switch from Mac and OS X to a Linux operating system out of frustration with the restrictions that usually comes with owning a Mac. As I do not have a ton of experience with installing a new OS, partitioning harddrives, configuring and compiling in C and so on, this repo is a way for me to collect the experiences gathered from this Linux journey.
-
 I made this repo mainly for myself because I wanted to collect and gather my experiences with installing Manjaro on a MacBook instead of going back and forth. I will add config files and updates as I gain experience.  
-Nevertheless, if you are as fed up with the restrictions of OS X and Mac in general, you might want to switch to a Linux based operating system. If that's the case, then I have bittersweet news: The good news is that your decision is excellent and Linux is a great choice. The bad news is that Mac and OS X is not very linux-friendly. I would in fact consider them linux-unfriendly. To make matters worse, you chose to install it on a laptop. But hey, there is a way and you just might get a better performing computer with better longevity out of this. If you care and spend the time to set things up properly.
+Anyway, if you are as fed up with the restrictions of OS X and Mac in general, you might want to switch to a Linux based operating system. If that's the case, then I have good news and bad news for you: 
+The good news is that your decision is excellent and Linux is a great choice. The bad news is that Mac and OS X is not very linux-friendly. I would in fact consider them linux-unfriendly. To make matters worse, you chose to install it on a laptop. But hey, there is a way and you just might get a better performing computer with better longevity out of this. If you care and spend the time to set things up properly.
 
-Here is a short list of common problems that people are having when trying to install Linux on a MacBook just so you know (this will depend on which Mac you are installing on). Before reading this list you should know that some of these problems are very easy to fix (a single line of code will fix most of these, but some are more persistent). All these issues, except for the sound and camera, is adressed here. 
+Here is a short list of common problems that people are having when trying to install Linux on a Mac just so you know (this will depend on which Mac you are installing on). Before reading this list you should know that some of these problems are very easy to fix (a single line of code will fix most of these, but some are more persistent). All these issues, except for the camera, is adressed here. 
 
 WiFi needs a new broadcom driver to work properly. This issue is easily fixed with a simple install of a package.
 
 Sound doesn't work from the start. Same solution applies here.
 
 Fans are going at max speed at all times. This issue is slightly more complicated but the solution is quite easy nevertheless.
+
+Camera is not working out of the box. Personally I don't care about taking selfies and having a camera on my laptop in general. But this issue should be easy to fix by installing the facetime package from the arch user repository.
 
 CPU runs hot (even when idle). This issue is adressed in the guide and it is the most complicated on the list. For some the solution is to disable file indexing as a background service. For others it requires a close monitoring of what exaclty is eating your CPU. This guide will go through setting up CPU frequency scaling as well. Your solution may vary and may require research. 
 
@@ -31,15 +35,15 @@ Where Apple seems to be asking "How much are you willing to spend?", Linux asks:
 
 ## Desktop Environments
 
-I will keep this short. I like the KDE desktop environment. It looks great and is highly customizable. If you want GNOME or whatever, go for it. In the end, if you don't like it, why not just install more than one and play around?
+I will keep this short. I like the KDE desktop environment. It looks great and is highly customizable. If you want GNOME or whatever, go for it. In the end, if you don't like it, why not just install more than one and play around? You can use multiple different desktop environments on the same OS. Welcome to Linux!s
 
 ### Before following my instructions on installing the actual OS
 
-The next sections are put together from a variety of sources. This guide mainly covers how to configure Manjaro post-installation. If you want to follow a different guide on installing the OS itself, skip the next 2 sections and I would recommend this guide: https://www.lifewire.com/dual-boot-linux-and-mac-os-4125733
+The next sections are put together from a variety of sources. This guide mainly covers how to configure Manjaro post-installation. And so the next sections are kept brief and short because there are a million different, good guides on how to dual boot OS X and Linux. If you want to follow a different guide on installing the OS, skip the next 2 sections and I would recommend this guide: https://www.lifewire.com/dual-boot-linux-and-mac-os-4125733
 
 ## Creating an installer on a usb flash drive
 
-Get yourself a basic usb flash drive of minimum 8 GB. I recommend using the program Etcher to format the disk. Get your preferred .iso from the official Manjaro website and flash the drive with Etcher. It's simple. 
+Get yourself a basic usb flash drive of minimum 8 GB. I recommend using the program Etcher to format the disk. Get your preferred .iso from the official Manjaro website that matches your desktop environment preference and flash the drive with Etcher. It's simple. 
 
 ## How do I create a partion, what is a partion and can I have a halfway chopped ASCII potato?
 
@@ -91,8 +95,8 @@ Get yourself a basic usb flash drive of minimum 8 GB. I recommend using the prog
 
 
 Simply put, a partion on a disk is a part of the HDD that is separated. Partitions allow you to install multiple operating systems on the same HDD.  
-In our case, this will be the way that we install Linux on a Mac. The reason why this is the recommended way of installing it, is because Mac sometimes do firmware updates and some of these firmware updates are crucial to the hardware on a low level. 
-The other reason why we are going to partition the disk first is that if somehow we make a mistake, we can always put our blindfold back on and revert back to our sad OS X ways. 
+In our case, this will be the way that we install Linux on a Mac. The reason why this is the recommended way of installing it, is because Mac sometimes does firmware updates and some of these firmware updates are crucial to the hardware on a low level. You do not want to miss those. If this was not the case we would be in a position to install Linux only on the Mac. But at this point in time I consider it too risky. 
+The other reason why we are going to partition the disk first is that if somehow we make a mistake, we can always put our blindfold back on and revert back to our OS X ways. 
 This is not a problem though. We can configure it in a way so that we only boot OS X every once in a while for an update and the rest of the time when your computer turns on it will boot into Manjaro.  
 
 To partition a disk on Mac see this short vid on YT: https://www.youtube.com/watch?v=n2xNDUqjbhU  
@@ -110,6 +114,8 @@ Enter your password.
 
 ## Installing rEFInd bootloader
 
+You can do without this convenient external bootloader but if this is your first time dual booting I would recommend using this. GRUB (the default bootloader for Manjaro) can be tricky for newbs like us.
+
 rEFInd Boot Manager: https://www.rodsbooks.com/refind/  
 To install the bootmanager, go to: https://sourceforge.net/projects/refind/ and download the zip.  
 Unzip it, open the folder, drag the install to your terminal window. Install it. Done.  
@@ -117,13 +123,14 @@ Unzip it, open the folder, drag the install to your terminal window. Install it.
 Once you have done all these steps, you are ready to boot a live Manjaro environment. 
 Reboot. rEFInd should present you with several options to boot now. Choose to boot from your flash drive.  
 Before booting into the environment, you can now set the locale, time, language and keyboard layout to your liking. Just choose default keyboard layout. 
+If you have an nvidia card that you want to control (i.e. different drivers), choose the nonfree option. If you have an intel gpu like me, choose free and Manjaro will figure out the driver for you (intel open sources it's drivers so it's not a problem).
 
 ## First glance at Manjaro
 
 Once inside the live environment of Manjaro, feel free to get a sense of the OS if this is your first time. 
 When you are done, click Launch Installer.
-Choose to install Manjaro with the settings you like but more importantly you need to choose "Replace a disk partition" to install it on the partition you made in OS X. 
-Leave the bootloader option to its default setting. Boot managing is taken care of. 
+Choose to install Manjaro with the settings you like but more importantly you need to choose "Replace a disk partition" to install it on the partition you made in OS X. The name might be different but you can probably guess which partition it is based on the size in that case.
+Leave the bootloader option to its default setting. Boot managing is taken care of by rEFInd.
 Wait for installation... drink coffee... come back and reboot.
 
 ## Access to Wifi
@@ -198,6 +205,8 @@ We can swap the option and cmd key by typing this:
  To make the changes permanent type:  
  `$ echo options hid_apple swap_opt_cmd=1 | sudo tee -a /etc/modprobe.d/hid_apple.conf`
 
+ Change the 1 to 0 to revert back
+
  ## Installation of libraries for lightweight gaming in case you are lucky enough to have an nvidia graphics card
 
 `sudo pacman -S lib32-libldap lib32-nvidia-utils lib32-nvidia-libgl lib32-alsa-lib 
@@ -209,3 +218,5 @@ PlayOnLinux is a front-end for wine basically and will allow you to play windows
 Simple and convenient list additions to your .bashrc
 `echo -e '\nalias ll="ls -lhF"' >> ~/.bashrc`  
 `echo -e '\nalias la="ls -lahF"' >> ~/.bashrc`  
+
+Remember to `source .bashrc` for the effect to kick or restart your terminal
