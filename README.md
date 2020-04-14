@@ -1,4 +1,4 @@
-# A traschan programmers guide on how to setup Manjaro (or Arch-based linux distro) on MacBook Pro Retina (mid 2014)
+# A trashcan programmers guide on how to setup Manjaro (or Arch-based linux distro) on MacBook Pro Retina (mid 2014)
 
 My strategy for finding a way to install Linux and FOSS on a closed Mac is that of sticking my nose where it doesn't belong, where I have unsufficient knowledge. The strategy is definitely not pretty, but I guarantee that it is a very efficient way of learning.  
 No, I am not a developer, nor am I a decent programmer. I am an artist who likes to work with code and software and I have some basic knowledge about computers. 
