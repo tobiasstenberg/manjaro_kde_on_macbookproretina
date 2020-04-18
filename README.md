@@ -101,7 +101,7 @@ The following command will ping all the servers and return a list that pacman wi
  `$ sudo pacman-mirrors -g`  
 
  ### 2.4 Installation of yay to install broadcom
-yay is an AUR helper, which means it is a program written in the GO language designed to make it easier for you to install packages from the Arch User Repository. You can do without AUR helpers but they do make installation easier for you and at the time of writing this guide, yay is generally considered the best one. Below you will see a quick cheatsheet for a list of commands to use with yay if you need to refer back to it for the rest of this guide.
+yay is an AUR helper, which means it is a program written in the GO language designed to make it easier for you to install packages from the Arch User Repository. We will be using yay to install packages that help us fix WiFi, controlling the fans configuring the CPU. You can do without AUR helpers but they do make installation easier for you and at the time of writing this guide, yay is generally considered the best one. Below you will see a quick cheatsheet for a list of commands to use with yay if you need to refer back to it for the rest of this guide.
   
  Install: `$ yay -S PKG`  
  Search: `$ yay -Ss PKG`  
@@ -114,6 +114,11 @@ Search for package and print a list of options: `$ yay PKG`
  Manual: `$ man yay`  
 
  Here is a link to a recent article on yay and AUR helpers in general if you are interested in reading more about it: https://www.ostechnix.com/yay-found-yet-another-reliable-aur-helper/
+
+ ### 2.5 Adding color and additional information to package management
+ By now you might be frustrated with the bland wall of text that comes from searching for a package with yay or listing installed packages with pacman. We can fix this by adding color and highlighting in the config file for pacman.
+ `$ sudo nano /etc/pacman.conf`
+ Around line 25-35 you should see a line that says `#Color` and another line that says `#VerbosePkgLists`. Remove the hash from both of these lines to uncomment them. The next time you run a pacman or yay command, you shuld be able to see the difference. If you don't like the verbose package list info, go into the config file again and uncomment that shit.
 
 ## 3.0 Configuration of hardware and drivers
 
