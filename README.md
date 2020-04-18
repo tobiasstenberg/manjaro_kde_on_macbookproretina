@@ -96,7 +96,11 @@ Open a terminal by pressing CTRL+ALT+T
 `$ sudo pacman -S gufw`  
 Open firewall configuration through the default application launcher in the bottom left window and enable with default settings. Reboot again.
 
- ### 2.3 Installation of yay to install broadcom
+### 2.3 Update mirrors for pacman for faster downloading of packages
+The following command will ping all the servers and return a list that pacman will use to download packages from. This will make downloading packages faster for you.   
+ `$ sudo pacman-mirrors -g`  
+
+ ### 2.4 Installation of yay to install broadcom
 yay is an AUR helper, which means it is a program written in the GO language designed to make it easier for you to install packages from the Arch User Repository. You can do without AUR helpers but they do make installation easier for you and at the time of writing this guide, yay is generally considered the best one. Below you will see a quick cheatsheet for a list of commands to use with yay if you need to refer back to it for the rest of this guide.
   
  Install: `$ yay -S PKG`  
@@ -111,7 +115,7 @@ Search for package and print a list of options: `$ yay PKG`
 
  Here is a link to a recent article on yay and AUR helpers in general if you are interested in reading more about it: https://www.ostechnix.com/yay-found-yet-another-reliable-aur-helper/
 
-## 3.0 Configuration of drivers and hardware
+## 3.0 Configuration of hardware and drivers
 
  ### 3.1 Installation of broadcom driver
  Open System Settings/Kernel to see which kernel version you are running. This makes a difference for the installation of the broadcom driver for WiFi. 
@@ -121,15 +125,8 @@ Search for package and print a list of options: `$ yay PKG`
  Reboot  
 
  After rebooting, you should now be able to finally access WiFi and can unplug your whatever device. 
- 
-### Update mirrors for pacman for faster downloading of packages
 
-The following command will ping all the servers and return a list that pacman will use to download packages from:  
-
- `$ sudo pacman-mirrors -g`  
-
- ### Installation of mbpfancontrol
-
+ ### 3.2 Getting your fans to work properly using mbpfancontrol
  At this point you might have noticed that your fans are not working properly, so it is time for us to do some configurations to make the Mac hardware run smoothly.  
  First things, do `$ yay mbpfancontrol` and install the package from the AUR.  
  This package depends on 2 services, coretemp and applesmc. In order to make those services run on boot, do `$ sudo nano /etc/modules` and add coretemp and applesmc in 2 lines. Press CTRL+X to save. Reboot.  
@@ -141,15 +138,15 @@ The following command will ping all the servers and return a list that pacman wi
  IMPORTANT: It's not very clear that the min and max speed of /etc/mbpfan.conf have been commented out with #. But to put the variables to use uncomment them.  
  You should now be able to get the fans running at decent RPM at least. 
 
- ### Configuring CPU frequency scaling
+ ### 3.3 Configuring CPU frequency scaling
 
  (coming soon)
 
- ### Configuring to HiDPI support to accommodate the retina display
+ ### 3.4 Configuring to HiDPI support to accommodate the retina display
 
  (coming soon)
 
- ### Swapping the opt and cmd key
+ ### 3.4 Swapping the opt and cmd key
 
 We can swap the option and cmd key by typing this:
  `$ echo 1 | sudo tee /sys/module/hid_apple/parameters/swap_opt_cmd`  
@@ -159,9 +156,9 @@ We can swap the option and cmd key by typing this:
 
  Change the 1 to 0 to revert back
 
- ### Installation of libraries for lightweight gaming in case you are lucky enough to have an nvidia graphics card
+ ### 3.5 Installation of libraries for lightweight gaming in case you are lucky enough to have an nvidia graphics card
+This oneliner will install a lot of packages and libraries that are needed for playing games on Manjaro. It will also install PlayOnLinux, Wine and Winetricks but you can just omit it from the command if you don't care about it. 
 
-`sudo pacman -S lib32-libldap lib32-nvidia-utils lib32-nvidia-libgl lib32-alsa-lib 
-lib32-alsa-plugins lib32-libpulse lib32-alsa-oss lib32-openal wine winetricks playonlinux`
+`$ sudo pacman -S lib32-libldap lib32-nvidia-utils lib32-nvidia-libgl lib32-alsa-lib lib32-alsa-plugins lib32-libpulse lib32-alsa-oss lib32-openal wine winetricks playonlinux`
 
 PlayOnLinux is a front-end for wine basically and will allow you to play windows-only games through linux. PlayOnLinux is depite its deceiving name an excellent candidate for running Adobe applications through wine in a convenient front-end, in case that's something you are interested in (hint: use FOSS instead). Another option for this could be Lutris or creating your own wrappers for wine. I will leave that up to you.
