@@ -1,41 +1,41 @@
 # A trashcan programmers guide on how to setup Manjaro (or Arch-based Linux distro) on Mac
 
 ## 0.0 Introductory statement and important information
-
-My strategy for finding a way to install Linux and FOSS on a closed Mac is that of sticking my nose where it doesn't belong, where I have unsufficient knowledge. The strategy is definitely not pretty, but I guarantee that it is a very efficient way of learning.  
+My strategy for finding a way to install Linux and FOSS on a closed Mac is that of sticking my nose where it doesn't belong, where I have unsufficient knowledge. The strategy is not pretty, but I guarantee that it is a very efficient way of learning.  
 I am not a developer, nor am I a decent programmer. I am an artist who likes to work with code and software and I have some basic knowledge about computers. 
 But I am a trashcan programmer at best. 
-So, be warned, if you choose to follow this guide, you are not following a perfect guide on how to get the OS you want. You are going on a messy journey of debugging software and hardware. But there is a way. Open source.
+So, be warned, if you choose to follow this guide, you are not following a perfect guide on how to get the OS you want. You are going on a messy journey of debugging software and hardware. But there is a way to get your freedom back. Open source. 
+I wish to point out as well that even though this guide was made for a MacBook Pro Retine (mid 2014) a lot of these issues are shared across different Mac computers and often the solutions are the same
 This guide also covers how to create a basic partition on your HDD so that you can always go back to macOS if you desire (I also explain why this is the optimal way to do it). I learned the hard way that erasing the entire disk is not the solution that you want. 
 
 ### 0.1 Why Linux instead of OS X?
+I know this can get tiring to constantly hear so I will keep this short:
+Apple makes its software specifically for Apple hardware and limits the freedom to choose the operating system and software that you want for the hardware that you own to try to pin you down in a rabbit hole of paying for overpriced hardware and software through a business model where you will eventually break deliberately fragile and shitty designed products to buy more expensive products that are compatible. (end of rant)
 
-I made the decision to switch from Mac and OS X to a Linux operating system out of frustration with the restrictions that usually comes with owning a Mac. As I do not have a ton of experience with installing a new OS, partitioning harddrives, configuring and compiling in C and so on, this repo is a way for me to collect the experiences gathered from this Linux journey.
+### 0.2 Motivation for this repo
+As I do not have a ton of experience with installing a new OS, partitioning harddrives, configuring and compiling in C and so on, this repo is a way for me to collect the experiences gathered from this Linux journey.
 I made this repo mainly for myself because I wanted to collect and gather my experiences with installing Manjaro on a MacBook instead of going back and forth. I will add config files and updates as I gain experience.  
 Anyway, if you are as fed up with the restrictions of OS X and Mac in general, you might want to switch to a Linux based operating system. If that's the case, then I have good news and bad news for you: 
 The good news is that your decision is excellent and Linux is a great choice. The bad news is that Mac and OS X is not very linux-friendly. I would in fact consider them linux-unfriendly. To make matters worse, you chose to install it on a laptop. But hey, there is a way and you just might get a better performing computer with better longevity out of this. If you care and spend the time to set things up properly.
 
-### 0.2 Why Manjaro?
+### 0.3 Why Manjaro?
 
 Manjaro is a beautiful distro of Linux which is Arch-based. An arch-based distro has the advantage of access to the Arch User Repository (AUR) which is an amazing community of people making open source software and packages. Installing Arch Linux could be an option for you, but Arch Linux is very difficult to install and requires quite a lot of effort. Arch Linux is cutting edge and if you want control over every aspect of your OS, it is the way to go. Manjaro is a lot easier to install and still reaps the benefits of access to the AUR while being friendly on new users.
-Manjaro is a rolling release system, meaning that every update is sent out immediately. Personally, I love rolling release systems but if it is not for you, consider installing a Debian-based distro maybe. Ubuntu, Mint, Fedore.  
-Where Apple seems to be asking "How much are you willing to spend?", Linux asks: "What is your flavour? Which type of OS fits you the best?"
+Manjaro is a rolling release system, meaning that every update is sent out immediately. Personally, I love rolling release systems but if it is not for you, consider installing a Debian-based distro maybe. Ubuntu, Mint, Fedora. 
 
 ### 0.3 A list of common problems/bugs that you might need to deal with
 
 Here is a short list of common problems that people are having when trying to install Linux on a Mac just so you know (this will depend on which Mac you are installing on). Before reading this list you should know that some of these problems are very easy to fix (a single line of code will fix most of these, but some are more persistent). All these issues, except for the camera, is adressed here. 
 
-WiFi needs a new broadcom driver to work properly. This issue is easily fixed with a simple install of a package.
+* WiFi needs a new broadcom driver to work properly. This issue is easily fixed with a simple install of a package.
 
-Sound doesn't work from the start. Same solution applies here.
+* Fans are going at max speed at all times. This issue is slightly more complicated but the solution is quite easy nevertheless.
 
-Fans are going at max speed at all times. This issue is slightly more complicated but the solution is quite easy nevertheless.
+* Camera is not working out of the box. Personally I don't care about taking selfies and having a camera on my laptop in general. But this issue should be easy to fix by installing the facetime package from the arch user repository.
 
-Camera is not working out of the box. Personally I don't care about taking selfies and having a camera on my laptop in general. But this issue should be easy to fix by installing the facetime package from the arch user repository.
+* CPU runs hot (even when idle). This issue is adressed in the guide and it is the most complicated on the list. For some the solution is to disable file indexing as a background service. For others it requires a close monitoring of what exaclty is eating your CPU. This guide will go through setting up CPU frequency scaling and debugging firmware interrupts as well. Your solution may vary and may require research. 
 
-CPU runs hot (even when idle). This issue is adressed in the guide and it is the most complicated on the list. For some the solution is to disable file indexing as a background service. For others it requires a close monitoring of what exaclty is eating your CPU. This guide will go through setting up CPU frequency scaling as well. Your solution may vary and may require research. 
-
-##### FINAL WARNING: This is not a perfect guide and if you choose to erase your disk or fry an egg on your burning hot CPU, it's up to you to find new hardware and a way to restore macOS if you want. Choice of OS is your decision. As it should be. 
+##### FINAL WARNING: This is not a perfect guide and if you choose to erase your disk or fry an egg on your burning hot CPU, it's up to you to find new hardware and a way to restore your OS if you want. Choice of OS is your decision. As it should be. 
 
 ## 1.0 Installing Manjaro
 The next sections are put together from a variety of sources. This guide mainly covers how to configure Manjaro post-installation. And so this section is kept brief and short because there are a million different, good guides on how to dual boot OS X and Linux. If you want to follow a different guide on installing the OS, skip this section and go to 2.0 and I would recommend this guide for the actual installation: https://www.lifewire.com/dual-boot-linux-and-mac-os-4125733
@@ -77,7 +77,7 @@ Reboot. rEFInd should present you with several options to boot now. Choose to bo
 Before booting into the environment, you can now set the locale, time, language and keyboard layout to your liking. Just choose default keyboard layout. 
 If you have an nvidia card that you want to control (i.e. different drivers), choose the nonfree option. If you have an intel gpu like me, choose free and Manjaro will figure out the driver for you (intel open sources it's drivers so it's not a problem).
 
-## 1.6 First glance at Manjaro
+### 1.6 First glance at Manjaro
 
 Once inside the live environment of Manjaro, feel free to get a sense of the OS if this is your first time. 
 When you are done, click Launch Installer.
@@ -136,7 +136,7 @@ Do the following to install some drivers for intel that do not come out of the b
 `$ pacman -S xf86-video-intel mesa-libgl libva-intel-driver libva`
 
  ### 3.3 Getting your fans to work properly using mbpfancontrol
-Section 3.2 and 3.3 are connected as they both deal with the same problem: temperature. In this section we will fix your fans running at max RPM but just know that even when fixed they might still run at max RPM if the temperature of your CPU is extremely high (that's what they're supposed to do). The fix for this comes in 3.3, so the result of this section might not be immediately visible for you.  
+Section 3.3 and 3.4 are connected as they both deal with the same problem: temperature. In this section we will fix your fans running at max RPM but just know that even when fixed they might still run at max RPM if the temperature of your CPU is extremely high (that's what they're supposed to do). The fix for this comes in 3.3, so the result of this section might not be immediately visible for you.  
  I would highly advise you to revisit this section and reconfigure the values for mbpfancontrol after you have done the necessary configurations for your CPU in section 3.3 to make sure the temperature is good and that frequency scaling is working. 
 
  At this point you might have noticed that your fans are not working properly, so it is time for us to do some configurations to make the Mac hardware run smoothly.  
@@ -165,7 +165,7 @@ Write down this value. This is your max_speed in /etc/mbpfan.conf. The same thin
  IMPORTANT: It's not very clear that the min and max speed of /etc/mbpfan.conf have been commented out with #. But to put the variables to use uncomment them.  
  You should now be able to get the fans running at decent RPM at least. 
 
- ### 3.4 Configuring CPU frequency scaling and temperature
+ ### 3.4 Configuring and debugging the CPU
 We need 2 packages to configure the cpu. Thermald to adjust the CPU and cpupower to avoid unnecessary boosting. First, install thermald:  
 `$ yay thermald`  
 
@@ -194,11 +194,10 @@ If you feel like it, come back to this configuration file and adjust the setting
 At this point you should close all your open programs, give your computer a break for 10-15 mins and come back to do another sensors reading:  
 `$ sensors`  
 Look at the temperature of all CPU cores. At this point you need to make a judgment whether you still consider this to be too high. As an example my MacBook Pro's CPU at this point was running at around 70 degrees celsius even when it was idling. This is clearly too much. Do some research to figure out what the normal idling temperature is for your CPU and whether you consider the numbers to be alarming. If it is, then it is time for us to debug what is causing the high temperature.  
-A common problem that you will see a lot of Mac users struggling with is ACPI interrupts. ACPI interrupts come from the firmware reacting strangely to the OS. This is one of the top reasons why Mac is difficult to run Linux on. Mac makes it software specifically for Mac hardware and thus they limit your freedom of choice and try to pin you down in a rabbit hole of paying for overpriced hardware and software through a business model where you break shitty products to buy more expensive products (end of rant). To find out if this is a problem for you as well you should do this:  
+A common problem that you will see a lot of Mac users struggling with is ACPI interrupts. ACPI interrupts come from the firmware reacting strangely to the OS. To find out if this is a problem for you as well you should do this:  
 `$ grep . -r /sys/firmware/acpi/interrupts/gpe*`  
 This command will use grep to print a list for you with potentially runaway ACPI interrups which indicate that something is not working the way it should.  
 As an example, when I ran this command the first time i found that ´gpe06´ had a logging of 3.2 million interrupts and the computer had been running only 40 mins. That is an alarming amount of intertupts. If you see a gpe that has around 50k interrupts this might still be considered normal if the computer has been running a bit of time.  
-
 The fix for a runaway gpe is to disable it. We are going to do this by making our own service that runs on boot and disables the gpe you are having trouble with. 
 To create the service do the following and change the ´*´ to the number of gpe that you are disabling:
 `$ sudo nano /etc/systemd/system/disable_gpe*.service`  
@@ -218,6 +217,14 @@ Now we enable it to run on boot:
 `$ sudo systemctl enable disable_gpe*.service`  
 To make the service run in the current session you are in:  
 `$ sudo systemctl start disable_gpe*.service`
+
+Now, disabling this service may or may not cause problems for you. Some people experience problems suspending the computer after disabling a service. But most of the time it will be fine. If not, please report back to me. 
+As a final remark on the debugging of the CPU I wish to point out that you should always do your own monitoring of temperatures and of processes that are requiring an alarming amount of CPU power. To keep tracks of these processes you can run a package called htop.  
+To install htop:
+`$ sudo pacman -S htop`  
+To run htop, simply type:  
+`$ htop`  
+This will provide you with an interface in your terminal showing processes taking power from your CPU. 
 
 ### 3.6 Configuring the battery power and power consumption
 Power is a package that will help us manage the power consumption if you are on a laptop. 
