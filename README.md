@@ -131,7 +131,11 @@ Search for package and print a list of options: `$ yay PKG`
 
  After rebooting, you should now be able to finally access WiFi and can unplug your whatever device. 
 
- ### 3.2 Getting your fans to work properly using mbpfancontrol
+### 3.2 Installing necessary intel drivers
+Do the following to install some drivers for intel that do not come out of the box:  
+`$ pacman -S xf86-video-intel mesa-libgl libva-intel-driver libva`
+
+ ### 3.3 Getting your fans to work properly using mbpfancontrol
 Section 3.2 and 3.3 are connected as they both deal with the same problem: temperature. In this section we will fix your fans running at max RPM but just know that even when fixed they might still run at max RPM if the temperature of your CPU is extremely high (that's what they're supposed to do). The fix for this comes in 3.3, so the result of this section might not be immediately visible for you.  
  I would highly advise you to revisit this section and reconfigure the values for mbpfancontrol after you have done the necessary configurations for your CPU in section 3.3 to make sure the temperature is good and that frequency scaling is working. 
 
@@ -142,6 +146,7 @@ Section 3.2 and 3.3 are connected as they both deal with the same problem: tempe
  This package depends on 2 services: coretemp and applesmc. In order to make those services run on boot, do the following:   
  `$ sudo nano /etc/modules`  
  Add ´coretemp´ and ´applesmc´ in the first 2 lines. Press CTRL+X to save. Reboot.  
+ What you have just done is that you have added the coretemp and applesmc to the modules that are running as soon as you boot into Manjaro. Both of these modules will help us get readings of temperatures and the speed at which the fans in your Mac is going along with other things.
 
  The mbpfancontrol package controls the fan and has a config file. To view the config file:   
  `$ sudo nano /etc/mbpfan.conf`  
@@ -160,15 +165,15 @@ Write down this value. This is your max_speed in /etc/mbpfan.conf. The same thin
  IMPORTANT: It's not very clear that the min and max speed of /etc/mbpfan.conf have been commented out with #. But to put the variables to use uncomment them.  
  You should now be able to get the fans running at decent RPM at least. 
 
- ### 3.3 Configuring CPU frequency scaling
+ ### 3.4 Configuring CPU frequency scaling
 
  (coming soon)
 
- ### 3.4 Configuring to HiDPI support to accommodate the retina display
+ ### 3.5 Configuring to HiDPI support to accommodate the retina display
 
  (coming soon)
 
- ### 3.4 Swapping the opt and cmd key
+ ### 3.6 Swapping the opt and cmd key
 
 We can swap the option and cmd key by typing this:
  `$ echo 1 | sudo tee /sys/module/hid_apple/parameters/swap_opt_cmd`  
@@ -178,7 +183,7 @@ We can swap the option and cmd key by typing this:
 
  Change the 1 to 0 to revert back
 
- ### 3.5 Installation of libraries for lightweight gaming in case you are lucky enough to have an nvidia graphics card
+ ### 3.7 Installation of libraries for lightweight gaming in case you are lucky enough to have an nvidia graphics card
 This oneliner will install a lot of packages and libraries that are needed for playing games on Manjaro. It will also install PlayOnLinux, Wine and Winetricks but you can just omit it from the command if you don't care about it. 
 
 `$ sudo pacman -S lib32-libldap lib32-nvidia-utils lib32-nvidia-libgl lib32-alsa-lib lib32-alsa-plugins lib32-libpulse lib32-alsa-oss lib32-openal wine winetricks playonlinux`
