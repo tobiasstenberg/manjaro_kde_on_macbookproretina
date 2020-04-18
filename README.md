@@ -101,7 +101,7 @@ The following command will ping all the servers and return a list that pacman wi
  `$ sudo pacman-mirrors -g`  
 
  ### 2.4 Installation of yay to install broadcom
-yay is an AUR helper, which means it is a program written in the GO language designed to make it easier for you to install packages from the Arch User Repository. We will be using yay to install packages that help us fix WiFi, controlling the fans configuring the CPU. You can do without AUR helpers but they do make installation easier for you and at the time of writing this guide, yay is generally considered the best one. Below you will see a quick cheatsheet for a list of commands to use with yay if you need to refer back to it for the rest of this guide.
+yay is an AUR helper, which means it is a program written in the GO language designed to make it easier for you to install packages from the Arch User Repository. We will be using yay to install packages that help us fix WiFi, controlling the fans and configuring the CPU. You can do without AUR helpers but they do make installation easier for you and at the time of writing this guide, yay is generally considered the best one. Below you will see a quick cheatsheet for a list of commands to use with yay if you need to refer back to it for the rest of this guide.
   
  Install: `$ yay -S PKG`  
  Search: `$ yay -Ss PKG`  
@@ -109,15 +109,15 @@ yay is an AUR helper, which means it is a program written in the GO language des
  Update pacman and yay packages: `$ yay -Syu`  
 Search for package and print a list of options: `$ yay PKG`  
  Install without confirm: `$ yay -S --noconfirm PKG`  
- Print pakker that need updates: `$ yay -Pu`  
+ Print a list of packages that need updates: `$ yay -Pu`  
  Remove unnecessary dependencies: `$ yay -Yc`  
  Manual: `$ man yay`  
 
  Here is a link to a recent article on yay and AUR helpers in general if you are interested in reading more about it: https://www.ostechnix.com/yay-found-yet-another-reliable-aur-helper/
 
  ### 2.5 Adding color and additional information to package management
- By now you might be frustrated with the bland wall of text that comes from searching for a package with yay or listing installed packages with pacman. We can fix this by adding color and highlighting in the config file for pacman.
- `$ sudo nano /etc/pacman.conf`
+ By now you might be frustrated with the bland wall of text that comes from searching for a package with yay or listing installed packages with pacman. We can fix this by adding color and highlighting in the config file for pacman.  
+ `$ sudo nano /etc/pacman.conf`  
  Around line 25-35 you should see a line that says `#Color` and another line that says `#VerbosePkgLists`. Remove the hash from both of these lines to uncomment them. The next time you run a pacman or yay command, you shuld be able to see the difference. If you don't like the verbose package list info, go into the config file again and uncomment that shit.
 
 ## 3.0 Configuration of hardware and drivers
@@ -132,14 +132,31 @@ Search for package and print a list of options: `$ yay PKG`
  After rebooting, you should now be able to finally access WiFi and can unplug your whatever device. 
 
  ### 3.2 Getting your fans to work properly using mbpfancontrol
- At this point you might have noticed that your fans are not working properly, so it is time for us to do some configurations to make the Mac hardware run smoothly.  
- First things, do `$ yay mbpfancontrol` and install the package from the AUR.  
- This package depends on 2 services, coretemp and applesmc. In order to make those services run on boot, do `$ sudo nano /etc/modules` and add coretemp and applesmc in 2 lines. Press CTRL+X to save. Reboot.  
+Section 3.2 and 3.3 are connected as they both deal with the same problem: temperature. In this section we will fix your fans running at max RPM but just know that even when fixed they might still run at max RPM if the temperature of your CPU is extremely high (that's what they're supposed to do). The fix for this comes in 3.3, so the result of this section might not be immediately visible for you.  
+ I would highly advise you to revisit this section and reconfigure the values for mbpfancontrol after you have done the necessary configurations for your CPU in section 3.3 to make sure the temperature is good and that frequency scaling is working. 
 
- The mbpfancontrol package controls the fan and has a config file. To view the config file do: `$ sudo nano /etc/mbpfan.conf`. This is the file that we edit to make the fans not run at maximum RPM all day long.  
- Before doing so, you should do: `$ sensors_detect`. This will guide you through getting readings from the sensors in your laptop. Just answer yes to all the questions.  
- After doing this, you can type `$ sensors` to get readings of the temperature in your CPU cores and the RPM of each fan.  
- You can now read different settings from the applesmc module to figure out how your settings should be. You should now do `$ cat /sys/devices/platform/applesmc.768/fan*_max`. Write down this value. This is your max_speed in /etc/mbpfan.conf.  
+ At this point you might have noticed that your fans are not working properly, so it is time for us to do some configurations to make the Mac hardware run smoothly.  
+ First things, do:  
+ `$ yay mbpfancontrol`  
+ Install the package from the AUR.  
+ This package depends on 2 services: coretemp and applesmc. In order to make those services run on boot, do the following:   
+ `$ sudo nano /etc/modules`  
+ Add ´coretemp´ and ´applesmc´ in the first 2 lines. Press CTRL+X to save. Reboot.  
+
+ The mbpfancontrol package controls the fan and has a config file. To view the config file:   
+ `$ sudo nano /etc/mbpfan.conf`  
+ This is the file that we edit to make the fans not run at maximum RPM all day long.  
+ Before doing so, you should detect the temperature sensors in your mac: 
+ `$ sensors_detect`  
+ This will guide you through getting readings from the sensors in your laptop. Just answer yes to all the questions.  
+ After doing this, you can use the sensors package to get readings of the temperature in your CPU cores and the RPM of each fan:  
+ `$ sensors`  
+Don't be too alarmed if the temperature of your CPU is highas well as the RPM of your fans. This is exactly what we are fixing in the next section 3.3. For now, you can shutdown the computer if you see the temperature going above 80-90 degrees celsius and come back to this guide when it has cooled down a bit. 
+
+ You can now read different settings from the applesmc module to figure out how your settings should be. You should now read the different settings for your hardware and add these to the config file for mbpfan.
+`$ cat /sys/devices/platform/applesmc.768/fan*_max`  
+Write down this value. This is your max_speed in /etc/mbpfan.conf. The same thing can be applied for obtaining the minimum RPM or your fans. Just change the last ´max´ to ´min´. 
+
  IMPORTANT: It's not very clear that the min and max speed of /etc/mbpfan.conf have been commented out with #. But to put the variables to use uncomment them.  
  You should now be able to get the fans running at decent RPM at least. 
 
