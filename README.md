@@ -35,7 +35,7 @@ Camera is not working out of the box. Personally I don't care about taking selfi
 
 CPU runs hot (even when idle). This issue is adressed in the guide and it is the most complicated on the list. For some the solution is to disable file indexing as a background service. For others it requires a close monitoring of what exaclty is eating your CPU. This guide will go through setting up CPU frequency scaling as well. Your solution may vary and may require research. 
 
-#### FINAL WARNING: This is not a perfect guide and if you choose to erase your disk or fry an egg on your burning hot CPU, it's up to you to find new hardware and a way to restore macOS if you want. Choice of OS is your decision. As it should be. 
+##### FINAL WARNING: This is not a perfect guide and if you choose to erase your disk or fry an egg on your burning hot CPU, it's up to you to find new hardware and a way to restore macOS if you want. Choice of OS is your decision. As it should be. 
 
 ## 1.0 Installing Manjaro
 The next sections are put together from a variety of sources. This guide mainly covers how to configure Manjaro post-installation. And so this section is kept brief and short because there are a million different, good guides on how to dual boot OS X and Linux. If you want to follow a different guide on installing the OS, skip this section and go to 2.0 and I would recommend this guide for the actual installation: https://www.lifewire.com/dual-boot-linux-and-mac-os-4125733
@@ -122,13 +122,13 @@ Search for package and print a list of options: `$ yay PKG`
 
  After rebooting, you should now be able to finally access WiFi and can unplug your whatever device. 
  
-## Update mirrors for pacman for faster downloading of packages
+### Update mirrors for pacman for faster downloading of packages
 
 The following command will ping all the servers and return a list that pacman will use to download packages from:  
 
  `$ sudo pacman-mirrors -g`  
 
- ## Installation of mbpfancontrol
+ ### Installation of mbpfancontrol
 
  At this point you might have noticed that your fans are not working properly, so it is time for us to do some configurations to make the Mac hardware run smoothly.  
  First things, do `$ yay mbpfancontrol` and install the package from the AUR.  
@@ -141,15 +141,15 @@ The following command will ping all the servers and return a list that pacman wi
  IMPORTANT: It's not very clear that the min and max speed of /etc/mbpfan.conf have been commented out with #. But to put the variables to use uncomment them.  
  You should now be able to get the fans running at decent RPM at least. 
 
- ## Configuring CPU frequency scaling
+ ### Configuring CPU frequency scaling
 
  (coming soon)
 
- ## Configuring to HiDPI support to accommodate the retina display
+ ### Configuring to HiDPI support to accommodate the retina display
 
  (coming soon)
 
- ## Swapping the opt and cmd key
+ ### Swapping the opt and cmd key
 
 We can swap the option and cmd key by typing this:
  `$ echo 1 | sudo tee /sys/module/hid_apple/parameters/swap_opt_cmd`  
@@ -159,7 +159,7 @@ We can swap the option and cmd key by typing this:
 
  Change the 1 to 0 to revert back
 
- ## Installation of libraries for lightweight gaming in case you are lucky enough to have an nvidia graphics card
+ ### Installation of libraries for lightweight gaming in case you are lucky enough to have an nvidia graphics card
 
 `sudo pacman -S lib32-libldap lib32-nvidia-utils lib32-nvidia-libgl lib32-alsa-lib 
 lib32-alsa-plugins lib32-libpulse lib32-alsa-oss lib32-openal wine winetricks playonlinux`
