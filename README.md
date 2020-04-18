@@ -165,15 +165,73 @@ Write down this value. This is your max_speed in /etc/mbpfan.conf. The same thin
  IMPORTANT: It's not very clear that the min and max speed of /etc/mbpfan.conf have been commented out with #. But to put the variables to use uncomment them.  
  You should now be able to get the fans running at decent RPM at least. 
 
- ### 3.4 Configuring CPU frequency scaling
+ ### 3.4 Configuring CPU frequency scaling and temperature
+We need 2 packages to configure the cpu. Thermald to adjust the CPU and cpupower to avoid unnecessary boosting. First, install thermald:  
+`$ yay thermald`  
+
+Thermald will help us keep the temperature low automatically and adjust settings accordingly.  
+To enable thermald:
+`$ systemctl enable thermald.service`
+
+If you at any point need to check whethter a service is still running:
+`$ systemctl status <SEVICEYOUWANTTOCHECK>`  
+The service should have a status of Active (running).
+
+To install cpupower:  
+`$ yay cpupower`  
+
+To edit the config file of cpupower:
+`$ sudo nano /etc/default/cpupower`
+
+Now you can change the max frequency that your cpu will run at and the governor. The governor is what determines how cpupower will adjust the frequencies. I recommend using powersave as a governor. Your CPU will still blast through but it won't ramp up unless it needs to.  
+You will need to know the frequency your CPU normally runs at and what it can boost to. My MacBook Pro Retina (mid 2014 normally runs at 2.6 GHz and can boost to at least 3.0).
+Adjust the two settings with your own frequency number like so:
+`governor='powersave'`
+`max_freq="2.6GHz"`
+
+If you feel like it, come back to this configuration file and adjust the settings and the governor to potentially get more power from your CPU.
+
+At this point you should close all your open programs, give your computer a break for 10-15 mins and come back to do another sensors reading:  
+`$ sensors`  
+Look at the temperature of all CPU cores. At this point you need to make a judgment whether you still consider this to be too high. As an example my MacBook Pro's CPU at this point was running at around 70 degrees celsius even when it was idling. This is clearly too much. Do some research to figure out what the normal idling temperature is for your CPU and whether you consider the numbers to be alarming. If it is, then it is time for us to debug what is causing the high temperature.  
+A common problem that you will see a lot of Mac users struggling with is ACPI interrupts. ACPI interrupts come from the firmware reacting strangely to the OS. This is one of the top reasons why Mac is difficult to run Linux on. Mac makes it software specifically for Mac hardware and thus they limit your freedom of choice and try to pin you down in a rabbit hole of paying for overpriced hardware and software through a business model where you break shitty products to buy more expensive products (end of rant). To find out if this is a problem for you as well you should do this:  
+`$ grep . -r /sys/firmware/acpi/interrupts/gpe*`  
+This command will use grep to print a list for you with potentially runaway ACPI interrups which indicate that something is not working the way it should.  
+As an example, when I ran this command the first time i found that ´gpe06´ had a logging of 3.2 million interrupts and the computer had been running only 40 mins. That is an alarming amount of intertupts. If you see a gpe that has around 50k interrupts this might still be considered normal if the computer has been running a bit of time.  
+
+The fix for a runaway gpe is to disable it. We are going to do this by making our own service that runs on boot and disables the gpe you are having trouble with. 
+
+https://forum.manjaro.org/t/macbook-air-2017-overheating/88599/9
+
+### 3.6 Configuring the battery power and power consumption
+Power is a package that will help us manage the power consumption if you are on a laptop. 
+`$ yay powertop`  
+
+To calibrate power (you want the laptop on battery power for this):
+`$ powertop --calibrate`
+
+We can turn power into a service that runs automatically every time you boot into Manjaro:
+`$ sudo nano /etc/systemd/powertop.service`  
+
+Add the following to the file:
+[Unit]
+Description=Powertop tunings
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/powertop --auto-tune
+
+[Install]
+WantedBy=multi-user.target
+
+To make powertop run automatically when you boot:
+`$ systemctl enable powertop.service`
+
+ ### 3.7 Configuring to HiDPI support to accommodate the retina display
 
  (coming soon)
 
- ### 3.5 Configuring to HiDPI support to accommodate the retina display
-
- (coming soon)
-
- ### 3.6 Swapping the opt and cmd key
+ ### 3.8 Swapping the opt and cmd key
 
 We can swap the option and cmd key by typing this:
  `$ echo 1 | sudo tee /sys/module/hid_apple/parameters/swap_opt_cmd`  
@@ -183,7 +241,7 @@ We can swap the option and cmd key by typing this:
 
  Change the 1 to 0 to revert back
 
- ### 3.7 Installation of libraries for lightweight gaming in case you are lucky enough to have an nvidia graphics card
+ ### 3.9 Installation of libraries for lightweight gaming in case you are lucky enough to have an nvidia graphics card
 This oneliner will install a lot of packages and libraries that are needed for playing games on Manjaro. It will also install PlayOnLinux, Wine and Winetricks but you can just omit it from the command if you don't care about it. 
 
 `$ sudo pacman -S lib32-libldap lib32-nvidia-utils lib32-nvidia-libgl lib32-alsa-lib lib32-alsa-plugins lib32-libpulse lib32-alsa-oss lib32-openal wine winetricks playonlinux`
