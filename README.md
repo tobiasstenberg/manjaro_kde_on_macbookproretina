@@ -200,8 +200,24 @@ This command will use grep to print a list for you with potentially runaway ACPI
 As an example, when I ran this command the first time i found that ´gpe06´ had a logging of 3.2 million interrupts and the computer had been running only 40 mins. That is an alarming amount of intertupts. If you see a gpe that has around 50k interrupts this might still be considered normal if the computer has been running a bit of time.  
 
 The fix for a runaway gpe is to disable it. We are going to do this by making our own service that runs on boot and disables the gpe you are having trouble with. 
+To create the service do the following and change the ´*´ to the number of gpe that you are disabling:
+`$ sudo nano /etc/systemd/system/disable_gpe*.service`  
 
-https://forum.manjaro.org/t/macbook-air-2017-overheating/88599/9
+Add the following in the file and remember to change the ´*´ of the exact gpe you want to disable:
+[Unit]
+Description=Disable GPE* interrupts
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c 'echo "disable" > /sys/firmware/acpi/interrupts/gpe*'
+
+[Install]
+WantedBy=multi-user.target
+
+Now we enable it to run on boot:
+`$ sudo systemctl enable disable_gpe*.service`  
+To make the service run in the current session you are in:  
+`$ sudo systemctl start disable_gpe*.service`
 
 ### 3.6 Configuring the battery power and power consumption
 Power is a package that will help us manage the power consumption if you are on a laptop. 
@@ -228,8 +244,7 @@ To make powertop run automatically when you boot:
 `$ systemctl enable powertop.service`
 
  ### 3.7 Configuring to HiDPI support to accommodate the retina display
-
- (coming soon)
+ Configuring Manjaro to take advantage of the Retina display will ultimately depend on your desktop environment as well. If you have chosen KDE plasma as DE like me, then you will find the settings you need by opening System Settings and going to the Monitor section. Here you will be able to change the resolution as well as the scale. My MacBook Pro Retina 15" for example is running at a resolution of 2800x1800 and as a result I have scaled the desktop to 150% of it's normal size. Now you can take advantage of the crisp HiDPI text and still have decent size of text and windows.
 
  ### 3.8 Swapping the opt and cmd key
 
