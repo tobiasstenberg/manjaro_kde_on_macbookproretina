@@ -8,17 +8,13 @@ So, be warned, if you choose to follow this guide, you are not following a perfe
 I wish to point out as well that even though this guide was made for a MacBook Pro Retina (mid 2014) a lot of these issues are shared across different Mac computers and often the solutions are the same.  
 This guide also covers how to create a basic partition on your HDD so that you can always go back to macOS if you desire (I also explain why this is the optimal way to do it). I learned the hard way that erasing the entire disk is not the solution that you want. 
 
-### 0.1 Why Linux instead of OS X?
-I know this can get tiring to constantly hear so I will keep this short:  
-Apple makes its software specifically for Apple hardware and limits the freedom to choose the operating system and software that you want for the hardware that you own to try to pin you down in a rabbit hole of paying for overpriced hardware and software through a business model where you will eventually break deliberately fragile and shitty designed products to buy more expensive products that are compatible. (end of rant)
-
-### 0.2 Motivation for this repo
+### 0.1 Motivation for this repo
 As I do not have a ton of experience with installing a new OS, partitioning harddrives, configuring and compiling in C and so on, this repo is a way for me to collect the experiences gathered from this Linux journey.
 I made this repo mainly for myself because I wanted to collect and gather my experiences with installing Manjaro on a MacBook instead of going back and forth. I will add config files and updates as I gain experience.  
 Anyway, if you are as fed up with the restrictions of OS X and Mac in general, you might want to switch to a Linux based operating system. If that's the case, then I have good news and bad news for you:  
 The good news is that your decision is excellent and Linux is a great choice. The bad news is that Mac and OS X is not very linux-friendly. I would in fact consider them linux-unfriendly. To make matters worse, you chose to install it on a laptop. But hey, there is a way and you just might get a better performing computer with better longevity out of this. If you care and spend the time to set things up properly.
 
-### 0.3 Why Manjaro?
+### 0.2 Why Manjaro?
 
 Manjaro is a beautiful distro of Linux which is Arch-based. An arch-based distro has the advantage of access to the Arch User Repository (AUR) which is a great community of people making open source software and packages. Installing Arch Linux could be an option for you, but Arch Linux is somewhat difficult to install and requires quite a lot of effort. Arch Linux is cutting edge and if you want control over every aspect of your OS, it is the way to go. Manjaro on the other hand is a lot easier to install and still gets the benefits of access to the AUR while being friendly on new users.
 Manjaro is a rolling release system, meaning that every update is sent out immediately. Personally, I love rolling release systems but if it is not for you, consider installing a Debian-based distro maybe. Ubuntu, Mint, Fedora. Whatever you like.
