@@ -235,7 +235,7 @@ To calibrate power (you want the laptop on battery power for this):
 `$ powertop --calibrate`  
 
 We can turn power into a service that runs automatically every time you boot into Manjaro:  
-`$ sudo nano /etc/systemd/powertop.service`    
+`$ sudo nano /etc/systemd/system/powertop.service`    
 
 Add the following to the file:  
 
