@@ -257,6 +257,14 @@ Note that the number you put in works best if it is a multiple of 96. For exampl
 If you ever want to see your current PPI of an X session you can use the following command:  
 
 `$ xdpyinfo | grep -B 2 resolution`  
+
+Fonts in certain applications might be scaled too much now. To counter this, we can scale down the fonts by 50% by creating a .profile file:  
+
+`$ touch ~/.profile`  
+
+Add "export GDK_DPI_SCALE=0.5" to the file and sav it. To see the effects type this in the terminal and reopen the application that has been scaled too much:  
+
+`$ source .profile`  
  
  If you have chosen KDE plasma as DE like me, then you will find the settings you need by opening System Settings and going to the Monitor section. Here you will be able to change the resolution as well as the scale. My MacBook Pro Retina 15" for example is running at a resolution of 2800x1800 and as a result I have scaled the desktop to 150% of it's normal size. Now you can take advantage of the crisp HiDPI text and still have decent size of text and windows.
 
