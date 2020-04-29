@@ -249,9 +249,18 @@ To make powertop run automatically when you boot:
 `$ systemctl enable powertop.service`  
 
  ### 3.7 Configuring to HiDPI support to accommodate the retina display
- Configuring Manjaro to take advantage of the Retina display will ultimately depend on your desktop environment as well. If you have chosen KDE plasma as DE like me, then you will find the settings you need by opening System Settings and going to the Monitor section. Here you will be able to change the resolution as well as the scale. My MacBook Pro Retina 15" for example is running at a resolution of 2800x1800 and as a result I have scaled the desktop to 150% of it's normal size. Now you can take advantage of the crisp HiDPI text and still have decent size of text and windows.
+ Configuring Manjaro to take advantage of the Retina display will ultimately depend on your desktop environment as well. If you decide to go for a tiling window manager like i3, bspwm or dwm, you will need to have a .Xresources file with certain settings. If you don't have ~/.Xresources file, just create it and enter the following in the file:  
 
- ### 3.8 Swapping the opt and cmd key
+`Xft.dpi: <dpi>  `
+
+Note that the number you put in works best if it is a multiple of 96. For example, a MacBook Pro 11,2 15" has a native PPI of 220 at full retina and so in this case i would use the number 192.  
+If you ever want to see your current PPI of an X session you can use the following command:  
+
+`$ xdpyinfo | grep -B 2 resolution`  
+ 
+ If you have chosen KDE plasma as DE like me, then you will find the settings you need by opening System Settings and going to the Monitor section. Here you will be able to change the resolution as well as the scale. My MacBook Pro Retina 15" for example is running at a resolution of 2800x1800 and as a result I have scaled the desktop to 150% of it's normal size. Now you can take advantage of the crisp HiDPI text and still have decent size of text and windows.
+
+ ### 3.8 Keyboard adjustments
 
 We can swap the option and cmd key by typing this:  
  `$ echo 1 | sudo tee /sys/module/hid_apple/parameters/swap_opt_cmd`    
@@ -259,7 +268,15 @@ We can swap the option and cmd key by typing this:
  To make the changes permanent type:    
  `$ echo options hid_apple swap_opt_cmd=1 | sudo tee -a /etc/modprobe.d/hid_apple.conf`
 
- Change the 1 to 0 to revert back
+ Change the 1 to 0 to revert back. This is the same file that we edit if we want to change the way that the FN key works. On some Apple Keyboards when running a Linux distro, the media keys fuck up everything below F5 (functions included), so if you want to have your brighness function on F1 and F2 back, you might need to edit this file. To edit this file, do the following:  
+
+ `$ sudo nano /etc/modprobe.d/hid_apple.conf`  
+
+ In the file you should see the swap_opt cmd if you chose to add this. On a new line enter the following:  
+
+ `options hid_apple fnmode= <NUMBER>`  
+
+ The number that you choose to enter into this line will change how the keyboard uses the function key. By default it should be 0. If you want to only use the function keys, it should be 1 and if you want the keys to default to F1-F12 and functions whenever you hold FN, then change the number to 2. I recommend 2.  
 
  ### 3.9 Installation of libraries for lightweight gaming in case you are lucky enough to have an nvidia graphics card
 This oneliner will install a lot of packages and libraries that are needed for playing games on Manjaro. It will also install PlayOnLinux, Wine and Winetricks but you can just omit it from the command if you don't care about it. 
