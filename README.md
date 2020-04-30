@@ -253,8 +253,12 @@ To make powertop run automatically when you boot:
 
 `Xft.dpi: <dpi>  `
 
-Note that the number you put in works best if it is a multiple of 96. For example, a MacBook Pro 11,2 15" has a native PPI of 220 at full retina and so in this case i would use the number 192.  
-If you ever want to see your current PPI of an X session you can use the following command:  
+Note that the number you put in works best if it is a multiple of 96. For example, a MacBook Pro 11,2 15" has a native PPI of 220 at full retina and so in this case i would use the number 192. This sets the Xfont DPI setting in your xsession when you log in.  
+In order to actually use the higher PPI screen we need to use an xrandr setting. You can use the following command to set a higher PPI with xrandr:  
+`$ xrandr --dpi <dpi>`  
+
+To make these changes permanent, add them to your .xinitrc file in your $HOME directory. If you don't have a .xinitrc, make one.  
+If you ever want to see your current PPI of an X session to make sure it is loaded, you can use the following command:  
 
 `$ xdpyinfo | grep -B 2 resolution`  
 
@@ -262,11 +266,11 @@ Fonts in certain applications might be scaled too much now. To counter this, we 
 
 `$ touch ~/.profile`  
 
-Add "export GDK_DPI_SCALE=0.5" to the file and sav it. To see the effects type this in the terminal and reopen the application that has been scaled too much:  
+Add "export GDK_DPI_SCALE=0.5" to the file and save it. To see the effects type this in the terminal and reopen the application that has been scaled too much:  
 
 `$ source .profile`  
  
- If you have chosen KDE plasma as DE like me, then you will find the settings you need by opening System Settings and going to the Monitor section. Here you will be able to change the resolution as well as the scale. My MacBook Pro Retina 15" for example is running at a resolution of 2800x1800 and as a result I have scaled the desktop to 150% of it's normal size. Now you can take advantage of the crisp HiDPI text and still have decent size of text and windows.
+ If you have chosen KDE plasma as DE like me, then you will find the settings you need by opening System Settings and going to the Monitor section. Here you will be able to change the resolution as well as the scale . My MacBook Pro Retina 15" for example is running at a resolution of 2800x1800 and as a result I have scaled the desktop to 150% of it's normal size. Now you can take advantage of the crisp HiDPI text and still have decent size of text and windows.
 
  ### 3.8 Keyboard adjustments
 
